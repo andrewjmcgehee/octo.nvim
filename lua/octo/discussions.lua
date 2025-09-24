@@ -46,7 +46,7 @@ end
 ---@param cb fun(selected: Category)
 local function select_a_category(categories, cb)
   vim.ui.select(categories, {
-    prompt = "Pick a category: ",
+    prompt = "Pick a Category: ",
     format_item = function(item)
       return item.name
     end,
@@ -107,10 +107,10 @@ function M.create(original_opts)
   opts.repo_id = repo_info.id
 
   if not opts.title then
-    opts.title = utils.input { prompt = "Creating discussion for " .. opts.repo .. ". Enter title" }
+    opts.title = utils.input { prompt = "(" .. opts.repo .. ") Discussion Title: " }
   end
   if not opts.body then
-    opts.body = utils.input { prompt = "Discussion body" }
+    opts.body = utils.input { prompt = "Body: " }
   end
 
   local function cb(selected) ---@param selected Category
