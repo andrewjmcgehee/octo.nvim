@@ -1109,7 +1109,34 @@ mutation($object_id: ID!, $user_ids: [ID!]!) {
 ]]
 
 -- https://docs.github.com/en/graphql/reference/mutations#createpullrequest
-M.create_pr = [[
+M.create_pr = fragments.cross_referenced_event
+  .. fragments.issue
+  .. fragments.pull_request
+  .. fragments.connected_event
+  .. fragments.milestoned_event
+  .. fragments.demilestoned_event
+  .. fragments.reaction_groups
+  .. fragments.label_connection
+  .. fragments.label
+  .. fragments.assignee_connection
+  .. fragments.issue_comment
+  .. fragments.assigned_event
+  .. fragments.labeled_event
+  .. fragments.unlabeled_event
+  .. fragments.closed_event
+  .. fragments.reopened_event
+  .. fragments.pull_request_review
+  .. fragments.project_cards
+  .. fragments.pull_request_commit
+  .. fragments.review_request_removed_event
+  .. fragments.review_requested_event
+  .. fragments.merged_event
+  .. fragments.review_dismissed_event
+  .. fragments.pull_request_timeline_items_connection
+  .. fragments.review_thread_information
+  .. fragments.review_thread_comment
+  .. fragments.renamed_title_event
+  .. [[
 mutation {
   createPullRequest(input: {baseRefName: "%s", headRefName: "%s", repositoryId: "%s", title: """%s""", body: """%s""", draft: %s}) {
     pullRequest {
@@ -1208,7 +1235,7 @@ mutation {
     }
   }
 }
-]] .. fragments.cross_referenced_event .. fragments.issue .. fragments.pull_request .. fragments.connected_event .. fragments.milestoned_event .. fragments.demilestoned_event .. fragments.reaction_groups .. fragments.label_connection .. fragments.label .. fragments.assignee_connection .. fragments.issue_comment .. fragments.assigned_event .. fragments.labeled_event .. fragments.unlabeled_event .. fragments.closed_event .. fragments.reopened_event .. fragments.pull_request_review .. fragments.project_cards .. fragments.pull_request_commit .. fragments.review_request_removed_event .. fragments.review_requested_event .. fragments.merged_event .. fragments.review_dismissed_event .. fragments.pull_request_timeline_items_connection .. fragments.review_thread_information .. fragments.review_thread_comment .. fragments.renamed_title_event
+]]
 
 M.mark_answer = [[
 mutation($id: ID!) {
